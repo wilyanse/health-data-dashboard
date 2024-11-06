@@ -10,6 +10,7 @@ Goal:
 
 Steps:
 1. [ ] Create dashboard frontend using CSV files
+    - 
 2. [ ] Migrate from CSV files as frontend source to Springboot backend
 3. [ ] Migrate from CSV files to MySQL database
 
