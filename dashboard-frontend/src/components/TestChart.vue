@@ -35,7 +35,9 @@ export default {
 
 <style scoped>
 .chart-container {
-  max-width: 600px;
-  margin: 0 auto;
+    width: 50vw;
+    height: 40vw;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <test-chart></test-chart>
+    <TestChart />
   </q-page>
 </template>
 
@@ -10,5 +10,3 @@ defineOptions({
   name: 'IndexPage',
 });
 </script>
-
-TestChart
