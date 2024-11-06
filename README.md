@@ -10,7 +10,7 @@ Goal:
 
 Steps:
 1. [ ] Create dashboard frontend using CSV files
-    - 
+    - very hard to import CSV files into Vue/Quasar, will focus on Springboot for now
 2. [ ] Migrate from CSV files as frontend source to Springboot backend
 3. [ ] Migrate from CSV files to MySQL database
 
