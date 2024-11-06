@@ -13,6 +13,9 @@ Steps:
     - very hard to import CSV files into Vue/Quasar, will focus on Springboot for now
 2. [ ] Migrate from CSV files as frontend source to Springboot backend
 3. [ ] Migrate from CSV files to MySQL database
+4. Dockerize all the services
+5. Add filters on the graphs to limit data to be seen
+6. 
 
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
