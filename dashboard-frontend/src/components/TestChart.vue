@@ -44,6 +44,10 @@ export default {
             show: false
           }
         },
+        title: {
+          text: 'Weight',
+          align: 'center'
+        },
         xaxis: {
             type: 'datetime',  // treat x-axis as time series
             title: {
