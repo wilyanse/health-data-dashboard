@@ -9,9 +9,9 @@ Goal:
 - [ ] Backend is also in charge of downloading the CSV files and updating the database as needed
 
 Stack:
-- Frontend: Vue + Quasar + ApexChart
-- Backend: Springboot
-- Database: MySQL + CSV files + API Key
+- Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
+- Backend: [Springboot](https://spring.io/projects/spring-boot)
+- Database: [MySQL](https://dev.mysql.com/doc/) + CSV files + API Key
 - Dockerfile: Frontend + Backend + Database
 
 Documentation:
