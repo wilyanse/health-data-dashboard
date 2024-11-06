@@ -1,11 +1,11 @@
 <template>
   <q-page class="flex flex-center">
-    <TestChart />
+    <WeightChart />
   </q-page>
 </template>
 
 <script setup>
-import TestChart from '../components/TestChart.vue'
+import WeightChart from '../components/WeightChart.vue'
 defineOptions({
   name: 'IndexPage',
 });
