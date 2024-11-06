@@ -7,6 +7,25 @@
 <script>
 import VueApexCharts from 'vue3-apexcharts';
 
+// TODO: Replace with real data
+const csvData = [
+  { Day: "2024-08-04", Group: "Uncategorized", Metric: "Weight", Unit: "lbs", Amount: 158.5 },
+  { Day: "2024-08-06", Group: "Uncategorized", Metric: "Weight", Unit: "lbs", Amount: 161.7 },
+  { Day: "2024-08-07", Group: "Uncategorized", Metric: "Weight", Unit: "lbs", Amount: 161.0 },
+];
+
+const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
+
+const parsedData = csvData.map(entry => ({
+  x: new Date(entry.Day).getTime(),
+  y: poundsToKg(entry.Amount)
+}));
+
+const seriesData = [{
+  name: 'Weight (kg)',
+  data: parsedData
+}];
+
 export default {
   components: {
     apexchart: VueApexCharts,
@@ -16,18 +35,28 @@ export default {
       chartOptions: {
         chart: {
           id: 'basic-line',
+          zoom: {
+                type: 'x',
+                enabled: true,
+                autoScaleYaxis: true
+              },
           toolbar: {
             show: false
           }
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            type: 'datetime',  // treat x-axis as time series
+            title: {
+            text: 'Date',
+            },
+        },
+        yaxis: {
+            title: {
+            text: 'Weight (kg)',
+            },
         },
       },
-      series: [{
-        name: 'Sales',
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 125, 110, 100, 90],
-      }],
+      series: seriesData,
     };
   },
 };
