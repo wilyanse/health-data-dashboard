@@ -1,16 +1,15 @@
 <template>
   <div>
-    <h1>Data from API</h1>
-    <div v-if="data">
-      <pre>{{ data }}</pre>
-    </div>
+    <weight-chart></weight-chart>
   </div>
 </template>
 
 <script>
+import WeightChart from '../components/WeightChart.vue';
 import apiService from '../services/ApiService.js';
 
 export default {
+  components: { WeightChart },
   data() {
     return {
       data: null,

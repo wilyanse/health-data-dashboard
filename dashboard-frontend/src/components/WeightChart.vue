@@ -6,25 +6,9 @@
 
 <script>
 import VueApexCharts from 'vue3-apexcharts';
+import apiService from '../services/ApiService.js';
 
 // TODO: Replace with real data
-const csvData = [
-  { Day: "2024-08-04", Group: "Uncategorized", Metric: "Weight", Unit: "lbs", Amount: 158.5 },
-  { Day: "2024-08-06", Group: "Uncategorized", Metric: "Weight", Unit: "lbs", Amount: 161.7 },
-  { Day: "2024-08-07", Group: "Uncategorized", Metric: "Weight", Unit: "lbs", Amount: 161.0 },
-];
-
-const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
-
-const parsedData = csvData.map(entry => ({
-  x: new Date(entry.Day).getTime(),
-  y: poundsToKg(entry.Amount)
-}));
-
-const seriesData = [{
-  name: 'Weight (kg)',
-  data: parsedData
-}];
 
 export default {
   components: {
@@ -32,7 +16,28 @@ export default {
   },
   data() {
     return {
-      chartOptions: {
+      chartOptions: null,
+      series: null,
+    };
+  },
+  async mounted() {
+    try {
+      const response = await apiService.getData();
+      const csvData = response.data;
+
+      const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
+
+      const parsedData = csvData.map(entry => ({
+        x: new Date(entry.Day).getTime(),
+        y: poundsToKg(entry.Amount)
+      }));
+
+      const seriesData = [{
+        name: 'Weight (kg)',
+        data: parsedData
+      }];
+
+      this.chartOptions = {
         chart: {
           id: 'basic-line',
           zoom: {
@@ -59,9 +64,11 @@ export default {
             text: 'Weight (kg)',
             },
         },
-      },
-      series: seriesData,
-    };
+      };
+      this.series = seriesData;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   },
 };
 </script>
