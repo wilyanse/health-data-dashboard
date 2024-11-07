@@ -1,20 +1,24 @@
 version: '3'
+
 services:
   springboot-app:
     build:
-      context: ./csvreader   # Path to your Spring Boot app
+      context: ./csvreader   # Path to your Spring Boot project
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"           # Expose port 8080 to the host
+      - "8080:8080"           # Expose Spring Boot API on port 8080
     volumes:
-      - ./csvreader:/app     # Mount local code for live development
-    command: ["./mvnw", "spring-boot:run"]  # Ensure this starts the app using Maven Wrapper
+      - ./csvreader:/app     # Mount local Spring Boot code (optional, for live development)
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev  # Optionally set Spring profiles for dev environment
 
   quasar-app:
     build:
-      context: ./dashboard-frontend       # Path to your Quasar app
+      context: ./dashboard-frontend       # Path to your Quasar project
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "9000:9000"           # Map Quasar container port 9000 to host port 9000
     volumes:
-      - ./dashboard-frontend:/app         # Mount local code
+      - ./dashboard-frontend:/app         # Mount local Quasar code (optional, for live development)
+    environment:
+      - API_URL=http://springboot-app:8080  # Use Docker service name to access Spring Boot API

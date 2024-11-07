@@ -1,27 +1,21 @@
-# Use a Node.js base image for building the Quasar app
-FROM node:16 AS build
+# Use an official Node.js runtime as a parent image
+FROM node:16-slim
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the package files and install dependencies
-COPY package*.json ./
+# Install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of the app files
+# Copy the rest of the application files
 COPY . .
 
-# Build the Quasar app
+# Build the Quasar app (optional, if you're using Quasar's production build)
 RUN npm run build
 
-# Use an Nginx base image to serve the static files
-FROM nginx:alpine
+# Expose port 9000 to make Quasar available externally
+EXPOSE 9000
 
-# Copy the built files to the Nginx directory
-COPY --from=build /app/dist/spa /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the app
+CMD ["npm", "run", "dev"]
