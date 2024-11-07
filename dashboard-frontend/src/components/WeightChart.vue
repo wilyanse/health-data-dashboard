@@ -23,10 +23,11 @@ export default {
   async mounted() {
     try {
       const response = await apiService.getData();
-      const csvData = response.data;
+      const csvData = response.data;  
 
       const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
 
+      // TODO: ALL weight is getting converted to Kg; make it so that only "Unit" == "kg" is being converted
       const parsedData = csvData.map(entry => ({
         x: new Date(entry.Day).getTime(),
         y: poundsToKg(entry.Amount)
