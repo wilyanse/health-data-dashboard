@@ -1,0 +1,19 @@
+version: '3'
+services:
+  springboot-app:
+    build:
+      context: ./csvreader
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./springboot:/app  # Mount local source code
+
+  quasar-app:
+    build:
+      context: ./dashboard-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./quasar:/app  # Mount local source code
