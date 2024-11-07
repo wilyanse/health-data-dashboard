@@ -1,4 +1,15 @@
-Health Data Dashboard
+# Health Data Dashboard
+## Running the Project
+1. Clone the repository and set the directory to the repository.
+2. Run `docker compose up`.
+3. Access the Springboot API endpoints at `localhost:8080`
+    - Endpoints:
+        - `localhost:8080/biometrics` : Cronometer biometrics data
+        - `localhost:8080/dailysummary`: Cronometer dailysummary data
+        - `localhost:8080/exercises`: Cronometer exercises data
+        - `localhost:8080/servings`: Cronometer servings data
+4. Access the Quasar App at `localhost:9000`
+
 
 Goal:
 - [ ] Display data from Cronometer + Hevy into an interactive dashboard
