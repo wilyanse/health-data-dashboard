@@ -15,7 +15,8 @@ Steps:
 3. [ ] Migrate from CSV files to MySQL database
 4. Dockerize all the services
 5. Add filters on the graphs to limit data to be seen
-6. 
+6. Find out how to query the data obtained from the CSV file with Springboot
+7. Move data parsing to Springboot
 
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
