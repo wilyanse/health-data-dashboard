@@ -18,7 +18,7 @@ public class CsvreaderApplication {
 		return new WebMvcConfigurer() {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/csvdata").allowedOrigins("http://localhost:8080");
+			registry.addMapping("/weightdata").allowedOrigins("http://localhost:8080");
 		}
 		};
 	}

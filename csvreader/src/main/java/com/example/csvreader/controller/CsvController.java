@@ -1,7 +1,7 @@
 package com.example.csvreader.controller;
 
 import com.example.csvreader.service.CsvReaderService;
-import com.example.csvreader.model.DataModel;
+import com.example.csvreader.model.WeightData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +16,10 @@ public class CsvController {
     @Autowired
     private CsvReaderService csvReaderService;
 
-    @GetMapping("/csvdata")
-    public ResponseEntity<List<DataModel>> getCsvData() {
+    @GetMapping("/weightdata")
+    public ResponseEntity<List<WeightData>> getCsvData() {
         try {
-            List<DataModel> data = csvReaderService.readCsv();
+            List<WeightData> data = csvReaderService.readCsv();
             return ResponseEntity.ok(data);
         } catch (IOException e) {
             return ResponseEntity.status(500).body(null);

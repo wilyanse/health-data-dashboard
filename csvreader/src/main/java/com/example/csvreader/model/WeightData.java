@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class DataModel {
+public class WeightData {
 
     @JsonProperty("Day") // Make sure this matches the header in your CSV file
     private String column1;
