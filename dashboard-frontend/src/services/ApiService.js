@@ -1,16 +1,15 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8080', // Replace with your Spring Boot base URL
+  baseURL: 'http://localhost:8080/', // Base URL for Spring Boot API
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 export default {
-  getCsvData(filePath) {
-    return apiClient.get(`/csv-data`, {
-      params: { filePath },
-    });
+  getData() {
+    return apiClient.get('/csvdata'); // replace with your actual endpoint
   },
+  // Add more functions as needed for other endpoints
 };
