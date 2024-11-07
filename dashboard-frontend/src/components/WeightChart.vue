@@ -23,6 +23,7 @@ export default {
       const response = await apiService.getData();
       const csvData = response.data;  
 
+      // TODO: move data parsing to backend
       const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
 
       const parsedData = csvData.map(entry => ({
