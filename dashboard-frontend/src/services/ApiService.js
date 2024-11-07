@@ -9,7 +9,7 @@ const apiClient = axios.create({
 
 export default {
   getData() {
-    return apiClient.get('/data'); // replace with your actual endpoint
+    return apiClient.get('/biometrics'); // replace with your actual endpoint
   },
   // Add more functions as needed for other endpoints
 };
