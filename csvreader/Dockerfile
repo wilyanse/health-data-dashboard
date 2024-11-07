@@ -1,18 +1,16 @@
-# Use a Maven image that includes both Maven and OpenJDK
-FROM maven:3.8.8-eclipse-temurin-17
+# Use an OpenJDK image with Maven wrapper and Java SDK
+FROM openjdk:17-jdk-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the pom.xml and download dependencies
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy the source code
+# Copy the Maven Wrapper and project files
 COPY . .
 
-# Expose the Spring Boot port
+# Ensure the Maven Wrapper is executable
+RUN chmod +x ./mvnw
+
+# Expose the application port
 EXPOSE 8080
 
-# Run the application in development mode
-CMD ["mvn", "spring-boot:run"]
+# Run the Spring Boot application using the Maven Wrapper
+CMD ["./mvnw", "spring-boot:run"]
