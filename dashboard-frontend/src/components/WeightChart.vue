@@ -1,5 +1,5 @@
 <template>
-  <div class="chart-container">
+  <div class="chart-container" v-if="chartOptions != null">
     <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
@@ -7,8 +7,6 @@
 <script>
 import VueApexCharts from 'vue3-apexcharts';
 import apiService from '../services/ApiService.js';
-
-// TODO: Replace with real data
 
 export default {
   components: {
