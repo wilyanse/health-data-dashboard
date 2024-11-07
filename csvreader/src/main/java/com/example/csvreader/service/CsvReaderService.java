@@ -1,31 +1,33 @@
 package com.example.csvreader.service;
 
-import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.example.csvreader.model.WeightData;
-
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CsvReaderService {
 
-    private final String csvFilePath = "src/main/resources/data.csv"; // Path to your CSV file
+    private final CsvMapper csvMapper = new CsvMapper();
 
-    public List<WeightData> readCsv() throws IOException {
-        File csvFile = new File(csvFilePath);
+    public List<Map<String, String>> readCsvFile(String fileName) {
+        try {
+            // Create a schema with headers automatically detected
+            CsvSchema schema = CsvSchema.emptySchema().withHeader();
 
-        CsvMapper csvMapper = new CsvMapper();
-        CsvSchema csvSchema = csvMapper.schemaFor(WeightData.class).withHeader().withColumnReordering(true);
-
-        MappingIterator<WeightData> data = csvMapper.readerFor(WeightData.class)
-                                                     .with(csvSchema)
-                                                     .readValues(csvFile);
-
-        return data.readAll();
+            // Use TypeReference to specify the exact type for readValues
+            return csvMapper
+                    .readerFor(new TypeReference<Map<String, String>>() {})
+                    .with(schema)
+                    .<Map<String, String>>readValues(new File("src/main/resources/" + fileName))
+                    .readAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
