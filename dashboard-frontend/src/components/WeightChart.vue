@@ -1,5 +1,5 @@
 <template>
-  <div class="chart-container" v-if="chartOptions != null">
+  <div class="chart-container" v-if="series != null">
     <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
@@ -14,29 +14,7 @@ export default {
   },
   data() {
     return {
-      chartOptions: null,
-      series: null,
-    };
-  },
-  async mounted() {
-    try {
-      const response = await apiService.getWeightData();
-      const csvData = response.data;
-
-      const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
-
-      const parsedData = csvData.map(entry => ({
-        x: new Date(entry.date).getTime(),
-        y: entry.unit === "lbs" ? poundsToKg(entry.amount) : entry.amount
-      }))
-      .sort((a, b) => a.x - b.x);
-
-      const seriesData = [{
-        name: 'Weight (kg)',
-        data: parsedData
-      }];
-
-      this.chartOptions = {
+      chartOptions: {
         chart: {
           id: 'basic-line',
           zoom: {
@@ -63,8 +41,13 @@ export default {
             text: 'Weight (kg)',
             },
         },
-      };
-      this.series = seriesData;
+      },
+      series: null,
+    };
+  },
+  async mounted() {
+    try {
+      this.series = await apiService.getWeightData();
     } catch (error) {
       console.error('Error fetching data:', error);
     }

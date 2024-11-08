@@ -8,8 +8,23 @@ const apiClient = axios.create({
 });
 
 export default {
-  getWeightData() {
-    return apiClient.get('/biometrics?metric=Weight'); // replace with your actual endpoint
+  async getWeightData() {
+    const apiResponse = await apiClient.get('/biometrics?metric=Weight');
+    const apiData = apiResponse.data
+    const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
+
+    const parsedData = apiData.map(entry => ({
+      x: new Date(entry.date).getTime(),
+      y: entry.unit === "lbs" ? poundsToKg(entry.amount) : entry.amount
+    }))
+    .sort((a, b) => a.x - b.x);
+
+    const seriesData = [{
+      name: 'Weight (kg)',
+      data: parsedData
+    }];
+
+    return seriesData;
   },
   // Add more functions as needed for other endpoints
 };
