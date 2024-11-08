@@ -2,7 +2,7 @@
 ## Running the Project
 1. Clone the repository and set the directory to the repository.
 2. Run `docker compose up`.
-    - If MySQL initialization scripts aren't being run, use `docker compose down -v` followed by `docker compose up -d`
+    - If MySQL initialization scripts aren't being run, use `docker compose down -v` followed by `docker compose up`
 3. Access the Springboot API endpoints at `localhost:8080`
     - Endpoints:
         - `localhost:8080/biometrics` : Cronometer biometrics data
@@ -39,6 +39,7 @@ Stack:
         - Best practice is to compartmentalize each initialization into separate files
             - NOTE THAT THE REMAINING INIT SCRIPTS IN THE PIPELINE WILL NOT RUN
     - DECIMAL values cannot be NULL in MySQL
+    - Running it individually can be done by running `docker exec -it health-datadashboard-mysql-db-1 mysql -u root -p` and entering the password
 - Dockerfile: Frontend + Backend + Database
 
 Documentation:
