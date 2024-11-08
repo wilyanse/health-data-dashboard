@@ -34,12 +34,14 @@ Steps:
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
 - Backend: [Springboot](https://spring.io/projects/spring-boot)
+    - Add CORS to allow reading API endpoint
 - Database: [MySQL](https://dev.mysql.com/doc/) + CSV files + API Key
     - If an init file returns an error, the other lines will not be executed.
         - Best practice is to compartmentalize each initialization into separate files
             - NOTE THAT THE REMAINING INIT SCRIPTS IN THE PIPELINE WILL NOT RUN
     - DECIMAL values cannot be NULL in MySQL
     - Running it individually can be done by running `docker exec -it health-datadashboard-mysql-db-1 mysql -u root -p` and entering the password
+    - Convention used in the Dockerfiles are 'XYZ' where X, Y, and Z are integers set to accommodate for init scripts to be added in between. Currently, X = 1 is for manipulating databases, X = 2 is for manipulating tables, and X = 3 is for manipulating records.
 - Dockerfile: Frontend + Backend + Database
 
 Documentation:
