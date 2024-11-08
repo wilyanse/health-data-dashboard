@@ -1,4 +1,4 @@
-package com.backend.mysqlconnector;
+package com.example.mysqlconnector;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

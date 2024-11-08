@@ -1,4 +1,4 @@
-package com.backend.mysqlconnector;
+package com.example.mysqlconnector;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
