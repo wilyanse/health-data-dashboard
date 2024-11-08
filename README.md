@@ -33,6 +33,35 @@ Steps:
 
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
+  - Pages:
+    - General stats:
+      - Weight graph
+        - display goal weight on graph
+      - Current weight vs Goal weight
+      - Compare your stat's to mine!
+        - form field to input stats
+        - stats are displayed on graphs
+      - daily summaries graph
+      - Latest daily stats
+        - Yesterday's data
+          - calories
+          - protein
+          - workout
+      - Progress pic 
+        - starting pic
+        - ending pic
+      - Link to latest tiktok vid
+    - Daily stats:
+      - individual stas on each day
+      - displays calorie values for that day
+      - displays meals eaten during the day
+        - bar graph for all foods eaten that day
+        - graph can be displayed by group of breakfast, lunch, dinner, snacks
+        - graph can be sorted by most calories to least
+        - mini graph to follow calorie graph for protein
+      - workout for that day
+        - compares that day's workout to previous day's workout
+          - i.e. volume compared to previous iteration (base around name of workout)
 - Backend: [Springboot](https://spring.io/projects/spring-boot)
     - Add CORS to allow reading API endpoint
 - Database: [MySQL](https://dev.mysql.com/doc/) + CSV files + API Key
