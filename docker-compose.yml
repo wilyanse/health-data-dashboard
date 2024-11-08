@@ -1,5 +1,5 @@
 services:
-  springboot-app:
+  csvreader-app:
     build:
       context: ./csvreader   # Path to your Spring Boot project
       dockerfile: Dockerfile
@@ -22,8 +22,6 @@ services:
       - "9000:9000"           # Map Quasar container port 9000 to host port 9000
     volumes:
       - ./dashboard-frontend:/app         # Mount local Quasar code (optional, for live development)
-    environment:
-      - API_URL=http://springboot-app:8080  # Use Docker service name to access Spring Boot API
 
   mysql-db:
     build:

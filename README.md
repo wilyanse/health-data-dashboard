@@ -40,7 +40,7 @@ Stack:
         - Best practice is to compartmentalize each initialization into separate files
             - NOTE THAT THE REMAINING INIT SCRIPTS IN THE PIPELINE WILL NOT RUN
     - DECIMAL values cannot be NULL in MySQL
-    - Running it individually can be done by running `docker exec -it health-datadashboard-mysql-db-1 mysql -u root -p` and entering the password
+    - Running it individually can be done by running `docker exec -it health-data-dashboard-mysql-db-1 mysql -u root -p` and entering the password
     - Convention used in the Dockerfiles are 'XYZ' where X, Y, and Z are integers set to accommodate for init scripts to be added in between. Currently, X = 1 is for manipulating databases, X = 2 is for manipulating tables, and X = 3 is for manipulating records.
 - Dockerfile: Frontend + Backend + Database
 
