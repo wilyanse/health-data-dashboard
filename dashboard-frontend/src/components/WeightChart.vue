@@ -29,7 +29,8 @@ export default {
       const parsedData = csvData.map(entry => ({
         x: new Date(entry.date).getTime(),
         y: entry.unit === "lbs" ? poundsToKg(entry.amount) : entry.amount
-      }));
+      }))
+      .sort((a, b) => a.x - b.x);
 
       console.log(parsedData[0])
 
