@@ -1,8 +1,12 @@
 package com.example.mysqlconnector.controller;
 
+import com.example.mysqlconnector.entity.Biometric;
 import com.example.mysqlconnector.dto.BiometricDTO;
 import com.example.mysqlconnector.service.BiometricService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -10,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api/biometrics")
 public class BiometricController {
 
+    @Autowired
     private final BiometricService biometricService;
 
     public BiometricController(BiometricService biometricService) {
@@ -23,5 +28,11 @@ public class BiometricController {
         @RequestParam(required = false) String unit
     ) {
         return biometricService.getBiometrics(groupName, metric, unit);
+    }
+
+    @PostMapping
+    public ResponseEntity<Biometric> addBiometric(@RequestBody BiometricDTO biometricDTO) {
+        Biometric savedBiometric = biometricService.addBiometric(biometricDTO);
+        return new ResponseEntity<>(savedBiometric, HttpStatus.CREATED);
     }
 }
