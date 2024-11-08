@@ -1,7 +1,7 @@
-package main.java.com.example.mysqlconnector.service;
+package com.example.mysqlconnector.service;
 
-import main.java.com.example.mysqlconnector.dto.BiometricDTO;
-import main.java.com.example.mysqlconnector.repository.BiometricRepository;
+import com.example.mysqlconnector.dto.BiometricDTO;
+import com.example.mysqlconnector.repository.BiometricRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class BiometricService {
         this.biometricRepository = biometricRepository;
     }
 
-    public List<BiometricDTO> getBiometrics(String groupName, String metric) {
-        return biometricRepository.findByGroupNameAndMetric(groupName, metric);
+    public List<BiometricDTO> getBiometrics(String groupName, String metric, String unit) {
+        return biometricRepository.findByGroupNameAndMetricAndUnit(groupName, metric, unit);
     }
 }

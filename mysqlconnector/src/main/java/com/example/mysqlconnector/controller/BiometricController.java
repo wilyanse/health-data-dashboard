@@ -1,7 +1,7 @@
-package main.java.com.example.mysqlconnector.controller;
+package com.example.mysqlconnector.controller;
 
-import main.java.com.example.mysqlconnector.dto.BiometricDTO;
-import main.java.com.example.mysqlconnector.service.BiometricService;
+import com.example.mysqlconnector.dto.BiometricDTO;
+import com.example.mysqlconnector.service.BiometricService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +19,9 @@ public class BiometricController {
     @GetMapping
     public List<BiometricDTO> getBiometrics(
         @RequestParam(required = false) String groupName,
-        @RequestParam(required = false) String metric
+        @RequestParam(required = false) String metric,
+        @RequestParam(required = false) String unit
     ) {
-        return biometricService.getBiometrics(groupName, metric);
+        return biometricService.getBiometrics(groupName, metric, unit);
     }
 }

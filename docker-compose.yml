@@ -1,18 +1,5 @@
 services:
-  csvreader-app:
-    build:
-      context: ./csvreader   # Path to your Spring Boot project
-      dockerfile: Dockerfile
-    depends_on:
-      mysql-db:
-        condition: service_healthy
-        restart: true
-    ports:
-      - "8080:8080"           # Expose Spring Boot API on port 8080
-    volumes:
-      - ./csvreader:/app     # Mount local Spring Boot code (optional, for live development)
-    environment:
-      - SPRING_PROFILES_ACTIVE=dev  # Optionally set Spring profiles for dev environment
+
 
   quasar-app:
     build:
@@ -41,3 +28,18 @@ services:
       interval: 10s      # How often to check
       timeout: 5s        # Time to wait for a response
       retries: 3         # Number of retries before marking as unhealthy
+
+  mysqlconnector-app:
+    build:
+      context: ./mysqlconnector   # Path to your Spring Boot project
+      dockerfile: Dockerfile
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "8040:8080"           # Expose Spring Boot API on port 8080
+    volumes:
+      - ./mysqlconnector:/app     # Mount local Spring Boot code (optional, for live development)
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev  # Optionally set Spring profiles for dev environment

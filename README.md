@@ -46,3 +46,20 @@ Stack:
 
 Documentation:
 - Add documentation website for modifying files as needed
+
+Removed CSVReader from docker compose for now:
+
+  csvreader-app:
+    build:
+      context: ./csvreader   # Path to your Spring Boot project
+      dockerfile: Dockerfile
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "8080:8080"           # Expose Spring Boot API on port 8080
+    volumes:
+      - ./csvreader:/app     # Mount local Spring Boot code (optional, for live development)
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev  # Optionally set Spring profiles for dev environment
