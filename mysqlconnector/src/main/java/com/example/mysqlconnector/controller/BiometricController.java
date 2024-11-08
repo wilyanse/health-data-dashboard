@@ -30,6 +30,14 @@ public class BiometricController {
         return biometricService.getBiometrics(groupName, metric, unit);
     }
 
+    @GetMapping("/sorted")
+    public ResponseEntity<List<Biometric>> getBiometrics(
+            @RequestParam(defaultValue = "date") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+        List<Biometric> biometrics = biometricService.findBiometricsWithOrder(sortBy, sortDirection);
+        return ResponseEntity.ok(biometrics);
+    }
+
     @PostMapping
     public ResponseEntity<Biometric> addBiometric(@RequestBody BiometricDTO biometricDTO) {
         Biometric savedBiometric = biometricService.addBiometric(biometricDTO);

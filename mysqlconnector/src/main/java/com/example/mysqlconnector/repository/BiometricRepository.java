@@ -20,4 +20,6 @@ public interface BiometricRepository extends JpaRepository<Biometric, Integer> {
         @Param("metric") String metric,
         @Param("unit") String unit
     );
+
+    
 }
