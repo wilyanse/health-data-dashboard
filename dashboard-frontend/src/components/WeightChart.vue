@@ -21,8 +21,7 @@ export default {
   async mounted() {
     try {
       const response = await apiService.getWeightData();
-      const csvData = response.data;  
-      console.log(csvData[0])
+      const csvData = response.data;
 
       const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
 
@@ -31,8 +30,6 @@ export default {
         y: entry.unit === "lbs" ? poundsToKg(entry.amount) : entry.amount
       }))
       .sort((a, b) => a.x - b.x);
-
-      console.log(parsedData[0])
 
       const seriesData = [{
         name: 'Weight (kg)',
