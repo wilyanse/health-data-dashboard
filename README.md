@@ -35,6 +35,10 @@ Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
 - Backend: [Springboot](https://spring.io/projects/spring-boot)
 - Database: [MySQL](https://dev.mysql.com/doc/) + CSV files + API Key
+    - If an init file returns an error, the other lines will not be executed.
+        - Best practice is to compartmentalize each initialization into separate files
+            - NOTE THAT THE REMAINING INIT SCRIPTS IN THE PIPELINE WILL NOT RUN
+    - DECIMAL values cannot be NULL in MySQL
 - Dockerfile: Frontend + Backend + Database
 
 Documentation:
