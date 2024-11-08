@@ -41,6 +41,40 @@ export default {
             text: 'Weight (kg)',
             },
         },
+        stroke: {
+            show: true,
+            curve: 'smooth',
+            lineCap: 'butt',
+            colors: undefined,
+            width: 2,
+            dashArray: 0, 
+        },
+        markers: {
+          size: 3,
+          colors: undefined,
+          strokeColors: '#fff',
+          strokeWidth: 3,
+          strokeOpacity: 0.2,
+          strokeDashArray: 0,
+          fillOpacity: 0.4,
+          discrete: [],
+          shape: "circle",
+          offsetX: 0,
+          offsetY: 0,
+          onClick: undefined,
+          onDblClick: undefined,
+          showNullDataPoints: true,
+          hover: {
+            size: undefined,
+            sizeOffset: 3,
+          }
+      },
+      forecastDataPoints: {
+        count: 3,
+        fillOpacity: 0.5,
+        strokeWidth: 2,
+        dashArray: 4,
+      }
       },
       series: null,
     };
@@ -57,8 +91,8 @@ export default {
 
 <style>
 .chart-container {
-    width: 50vw;
-    height: 40vw;
+    width: 30%;
+    height: 20%;
     margin: 0 auto;
     aspect-ratio: 16 / 9;
 }
