@@ -20,16 +20,18 @@ export default {
   },
   async mounted() {
     try {
-      const response = await apiService.getData();
+      const response = await apiService.getWeightData();
       const csvData = response.data;  
+      console.log(csvData[0])
 
-      // TODO: move data parsing to backend
       const poundsToKg = pounds => parseFloat(pounds * 0.453592).toFixed(2);
 
       const parsedData = csvData.map(entry => ({
-        x: new Date(entry.Day).getTime(),
-        y: entry.Unit === "lbs" ? poundsToKg(entry.Amount) : entry.Amount
+        x: new Date(entry.date).getTime(),
+        y: entry.unit === "lbs" ? poundsToKg(entry.amount) : entry.amount
       }));
+
+      console.log(parsedData[0])
 
       const seriesData = [{
         name: 'Weight (kg)',
