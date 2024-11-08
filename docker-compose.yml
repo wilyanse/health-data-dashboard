@@ -37,7 +37,7 @@ services:
     ports:
       - "7000:3306"  # Map MySQL's default port 3306 to 7000 on the host
     volumes:
-      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount init-scripts directory
+      - ./mysql-db/init-scripts:/docker-entrypoint-initdb.d  # Mount init-scripts directory
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s      # How often to check

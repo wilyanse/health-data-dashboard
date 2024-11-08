@@ -2,6 +2,7 @@
 ## Running the Project
 1. Clone the repository and set the directory to the repository.
 2. Run `docker compose up`.
+    - If MySQL initialization scripts aren't being run, use `docker compose down -v` followed by `docker compose up -d`
 3. Access the Springboot API endpoints at `localhost:8080`
     - Endpoints:
         - `localhost:8080/biometrics` : Cronometer biometrics data
