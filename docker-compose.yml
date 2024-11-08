@@ -1,10 +1,12 @@
-version: '3'
-
 services:
   springboot-app:
     build:
       context: ./csvreader   # Path to your Spring Boot project
       dockerfile: Dockerfile
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+        restart: true
     ports:
       - "8080:8080"           # Expose Spring Boot API on port 8080
     volumes:
@@ -22,3 +24,22 @@ services:
       - ./dashboard-frontend:/app         # Mount local Quasar code (optional, for live development)
     environment:
       - API_URL=http://springboot-app:8080  # Use Docker service name to access Spring Boot API
+
+  mysql-db:
+    build:
+      context: ./mysql-db
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: health_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "7000:3306"  # Map MySQL's default port 3306 to 7000 on the host
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount init-scripts directory
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s      # How often to check
+      timeout: 5s        # Time to wait for a response
+      retries: 3         # Number of retries before marking as unhealthy
