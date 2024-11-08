@@ -62,6 +62,12 @@ Stack:
       - workout for that day
         - compares that day's workout to previous day's workout
           - i.e. volume compared to previous iteration (base around name of workout)
+    - Weekly stats:
+      - how this week compares to previous week
+        - calories
+        - protein
+        - workouts
+          - volume
 - Backend: [Springboot](https://spring.io/projects/spring-boot)
     - Add CORS to allow reading API endpoint
 - Database: [MySQL](https://dev.mysql.com/doc/) + CSV files + API Key

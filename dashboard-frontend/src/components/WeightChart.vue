@@ -40,6 +40,8 @@ export default {
             title: {
             text: 'Weight (kg)',
             },
+            min: 50,
+            max: 90
         },
         stroke: {
             show: true,
@@ -51,17 +53,11 @@ export default {
         },
         markers: {
           size: 3,
-          colors: undefined,
           strokeColors: '#fff',
           strokeWidth: 3,
           strokeOpacity: 0.2,
-          strokeDashArray: 0,
           fillOpacity: 0.4,
-          discrete: [],
           shape: "circle",
-          offsetX: 0,
-          offsetY: 0,
-          onClick: undefined,
           onDblClick: undefined,
           showNullDataPoints: true,
           hover: {
@@ -74,7 +70,26 @@ export default {
         fillOpacity: 0.5,
         strokeWidth: 2,
         dashArray: 4,
-      }
+      },
+      annotations: {
+        yaxis: [
+          {
+            y: 65,
+            y2: 0,
+            borderColor: '#000',
+            fillColor: '#FEB019',
+            opacity: 0.2,
+            label: {
+              borderColor: '#333',
+              style: {
+                fontSize: '10px',
+                color: '#333',
+                background: '#FEB019',
+              },
+              text: 'Goal weight',
+            }
+        }]
+      },
       },
       series: null,
     };
@@ -91,8 +106,8 @@ export default {
 
 <style>
 .chart-container {
-    width: 30%;
-    height: 20%;
+    width: 70%;
+    height: 100%;
     margin: 0 auto;
     aspect-ratio: 16 / 9;
 }
