@@ -1,6 +1,4 @@
 services:
-
-
   quasar-app:
     build:
       context: ./dashboard-frontend       # Path to your Quasar project
@@ -9,6 +7,8 @@ services:
       - "9000:9000"           # Map Quasar container port 9000 to host port 9000
     volumes:
       - ./dashboard-frontend:/app         # Mount local Quasar code (optional, for live development)
+    networks:
+      - app-network
 
   mysql-db:
     build:
@@ -20,26 +20,27 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - "7000:3306"  # Map MySQL's default port 3306 to 7000 on the host
+      - "3306:3306"  # Map MySQL's default port 3306 to 7000 on the host
     volumes:
       - ./mysql-db/init-scripts:/docker-entrypoint-initdb.d  # Mount init-scripts directory
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s      # How often to check
-      timeout: 5s        # Time to wait for a response
-      retries: 3         # Number of retries before marking as unhealthy
+    networks:
+      - app-network
 
   mysqlconnector-app:
     build:
       context: ./mysqlconnector   # Path to your Spring Boot project
       dockerfile: Dockerfile
     depends_on:
-      mysql-db:
-        condition: service_healthy
-        restart: true
+      - mysql-db
     ports:
-      - "8040:8080"           # Expose Spring Boot API on port 8080
+      - "8080:8080"           # Expose Spring Boot API on port 8080
     volumes:
       - ./mysqlconnector:/app     # Mount local Spring Boot code (optional, for live development)
     environment:
-      - SPRING_PROFILES_ACTIVE=dev  # Optionally set Spring profiles for dev environment
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/health_db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
