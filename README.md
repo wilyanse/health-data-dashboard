@@ -30,6 +30,15 @@ Steps:
 [ ] Find out how to query the data obtained from the CSV file with Springboot
 [ ] Move data parsing to Springboot
 [ ] As new daily data is added, compare data to previous data points
+[ ] Create a reusable stats card component where:
+  - the component can accept data:
+    - current weight vs goal weight vs starting weight
+    - calories consumed vs calorie goal
+    - protein consumed vs protein goal
+  - component automatically sets styles for sub data
+    - goal and starting weight data is turned green depending on lost weight or gained weight
+    - calories consumed automatically turns green if below supposed goal; green otherwise
+    - protein consumed automatically turns green if above goal; red otherwise
 
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
