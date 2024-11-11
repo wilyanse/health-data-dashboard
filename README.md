@@ -10,6 +10,7 @@
         - `localhost:8080/exercises`: Cronometer exercises data
         - `localhost:8080/servings`: Cronometer servings data
 4. Access the Quasar App at `localhost:9000`
+5. Access the MySQL database at `localhost:3306`
 
 
 Goal:
@@ -21,32 +22,20 @@ Goal:
 - [ ] Backend is also in charge of downloading the CSV files and updating the database as needed
 
 Steps:
-[ ] Create dashboard frontend using CSV files
-    - very hard to import CSV files into Vue/Quasar, will focus on Springboot for now
+[X] Create dashboard frontend using CSV files
 [X] Migrate from CSV files as frontend source to Springboot backend
-[ ] Migrate from CSV files to MySQL database
-[ ] Dockerize all the services
+[X] Migrate from CSV files to MySQL database
+[X] Dockerize all the services
 [ ] Add filters on the graphs to limit data to be seen
-[ ] Find out how to query the data obtained from the CSV file with Springboot
+[X] Find out how to query the data obtained from the MySQL database with Springboot
 [ ] Move data parsing to Springboot
 [ ] As new daily data is added, compare data to previous data points
-[ ] Create a reusable stats card component where:
-  - the component can accept data:
-    - current weight vs goal weight vs starting weight
-    - calories consumed vs calorie goal
-    - protein consumed vs protein goal
-  - component automatically sets styles for sub data
-    - goal and starting weight data is turned green depending on lost weight or gained weight
-    - calories consumed automatically turns green if below supposed goal; green otherwise
-    - protein consumed automatically turns green if above goal; red otherwise
+[X] Create a reusable stats card component
 
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
   - Pages:
     - General stats:
-      - Weight graph
-        - display goal weight on graph
-      - Current weight vs Goal weight
       - Compare your stats to mine!
         - form field to input stats
         - stats are displayed on graphs
