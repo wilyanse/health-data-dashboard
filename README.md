@@ -38,15 +38,15 @@ Stack:
       - Weight graph
         - display goal weight on graph
       - Current weight vs Goal weight
-      - Compare your stat's to mine!
+      - Compare your stats to mine!
         - form field to input stats
         - stats are displayed on graphs
       - daily summaries graph
       - Latest daily stats
         - Yesterday's data
-          - calories
-          - protein
-          - workout
+          - calories vs goal calories
+          - protein vs goal protein
+          - workout finished
       - Progress pic 
         - starting pic
         - ending pic
