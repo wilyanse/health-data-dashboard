@@ -2,15 +2,12 @@
   <div class="stats-comparison">
     <!-- Main stat comparison -->
     <div class="stat">
-      <p class="main-stat">{{ mainStat.value }} </p>
-      <p class="label">{{ mainStat.label }}</p>
+      <p class="main-stat">{{ mainStat.label }}: {{ mainStat.value }}</p>
     </div>
 
     <!-- Secondary stats comparison -->
     <div v-for="(stat, index) in subStats" :key="index" class="stat">
-      <p class="sub-stat">{{ stat.value }}</p>
-      <p class="label">{{ stat.label }}</p>
-      <p class="comp">{{ stat.comp }}</p>
+      <p class="sub-stat">{{ stat.label }}: {{ stat.value }}</p>
     </div>
   </div>
 </template>
@@ -35,25 +32,26 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  padding: 20px;
+  background-color: aliceblue;
+  width: 20%;
+  margin: 10px;
+  border-radius: 10%;
+  text-align: left;
+  justify-content: center;
 }
 
 .stat {
-  margin-bottom: 10px;
+    width: 90%;
 }
 
-.main-stat,
-.sub-stat {
+.main-stat{
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-.comparison span {
-  font-size: 1rem;
-}
-
-.unit {
-  font-size: 0.8rem;
-  color: #555;
+.sub-stat {
+    font-size: 0.8rem;
 }
 
 .good {
