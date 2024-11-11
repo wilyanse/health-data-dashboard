@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1 v-if="currentWeight !== null">Current Weight: {{ currentWeight }} kg</h1>
-    <h1 v-else>Loading weight data...</h1>
-    
+    <StatCard :mainStat="mainStat" :subStats="subStats"/>
     <WeightChart />
   </div>
 </template>
@@ -11,16 +9,48 @@
 import { ref, onMounted } from 'vue';
 import WeightChart from '../components/WeightChart.vue';
 import apiService from '../services/ApiService.js';
+import StatCard from '../components/StatCard.vue';
 
-// Declare reactive state variable
-const currentWeight = ref(null);
+const mainStat = ref({
+  value: 75,
+  label: "Current Weight"
+});
+const subStats = ref([
+  {
+    value: 65,
+    label: "Goal Weight",
+    comp: true
+  },
+  {
+    value: 95,
+    label: "Starting Weight",
+    comp: true
+  }
+]);
 
-// Define async function to load current weight
 async function loadCurrentWeight() {
-  currentWeight.value = await apiService.getCurrentWeight();
+  const apiData = await apiService.getWeightDataSorted("date", "desc");
+  console.log(apiData)
+  mainStat.value = {
+    value: apiData[0].y,
+    label: "Current Weight",
+    unit: "kg",
+  };
+
+  subStats.value = [
+    {
+      value: 65,
+      label: "Goal Weight",
+      comp: false
+    },
+    {
+      value: apiData[apiData.length - 1].y,
+      label: "Starting Weight",
+      comp: false
+    }
+  ];
 }
 
-// Call loadCurrentWeight when the component is mounted
 onMounted(() => {
   loadCurrentWeight();
 });
