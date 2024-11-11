@@ -66,7 +66,7 @@ export default {
           }
         },
         forecastDataPoints: {
-          count: 3,
+          count: 20,
           fillOpacity: 0.5,
           strokeWidth: 2,
           dashArray: 4,
@@ -110,22 +110,16 @@ export default {
         {
           x: minYObject.x,
           y: minYObject.y,
-          borderColor: '#3D348B',
-          borderWidth: 2,
-          label: {
-            text: 'Lightest: ' + minYObject.y,
-            textAnchor: 'end',
-          },
+          marker: {
+            fillColor: '#2d9c01',
+          }
         },
         {
           x: maxYObject.x,
           y: maxYObject.y,
-          borderColor: '#3D348B',
-          borderWidth: 2,
-          label: {
-            text: 'Heaviest: ' + maxYObject.y,
-            textAnchor: 'start',
-          },
+          marker: {
+            fillColor: '#5700b9',
+          }
         }
       );
     } catch (error) {
