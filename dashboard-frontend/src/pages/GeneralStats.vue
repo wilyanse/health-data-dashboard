@@ -20,11 +20,6 @@ const subStats = ref([
     value: 65,
     label: "Goal Weight",
     comp: true
-  },
-  {
-    value: 95,
-    label: "Starting Weight",
-    comp: true
   }
 ]);
 
@@ -39,6 +34,11 @@ async function loadCurrentWeight() {
 
   subStats.value = [
     {
+      value: apiData[1].y,
+      label: "Previous Weight",
+      comp: false
+    },
+    {
       value: 65,
       label: "Goal Weight",
       comp: false
@@ -47,7 +47,7 @@ async function loadCurrentWeight() {
       value: apiData[apiData.length - 1].y,
       label: "Starting Weight",
       comp: false
-    }
+    },
   ];
 }
 
