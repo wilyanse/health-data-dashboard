@@ -22,15 +22,16 @@ Goal:
 - [ ] Backend is also in charge of downloading the CSV files and updating the database as needed
 
 Steps:
-[X] Create dashboard frontend using CSV files
-[X] Migrate from CSV files as frontend source to Springboot backend
-[X] Migrate from CSV files to MySQL database
-[X] Dockerize all the services
-[ ] Add filters on the graphs to limit data to be seen
-[X] Find out how to query the data obtained from the MySQL database with Springboot
-[ ] Move data parsing to Springboot
-[ ] As new daily data is added, compare data to previous data points
-[X] Create a reusable stats card component
+- [X] Create dashboard frontend using CSV files
+- [X] Migrate from CSV files as frontend source to Springboot backend
+- [X] Migrate from CSV files to MySQL database
+- [X] Dockerize all the services
+- [ ] Add filters on the graphs to limit data to be seen
+- [X] Find out how to query the data obtained from the MySQL database with Springboot
+- [ ] Move data parsing to Springboot
+- [ ] As new daily data is added, compare data to previous data points
+- [X] Create a reusable stats card component
+- [ ] Add backend querying for dailysummaries
 
 Stack:
 - Frontend: [Vue](https://vuejs.org/guide/introduction.html) + [Quasar](https://quasar.dev/components) + [ApexChart](https://apexcharts.com/docs/vue-charts/)
