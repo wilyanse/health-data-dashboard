@@ -131,8 +131,6 @@ export default {
 
 <style>
 .chart-container {
-    width: 70%;
-    height: 100%;
     margin: 0 auto;
     aspect-ratio: 16 / 9;
 }

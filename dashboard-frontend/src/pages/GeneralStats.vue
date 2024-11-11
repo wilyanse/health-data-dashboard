@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <StatCard :mainStat="mainStat" :subStats="subStats"/>
-    <WeightChart />
+  <div class="dashboard">
+    <StatCard :mainStat="mainStat" :subStats="subStats" class="stat-card"/>
+    
+    <WeightChart class="weight-chart"/>
   </div>
 </template>
 
@@ -55,3 +56,18 @@ onMounted(() => {
   loadCurrentWeight();
 });
 </script>
+
+<style scoped>
+  .weight-chart {
+    width: 50%;
+    margin-top: 30px;
+  }
+
+  .stat-card {
+    width: 35%;
+  }
+
+  .dashboard {
+    display: flex;
+  }
+</style>

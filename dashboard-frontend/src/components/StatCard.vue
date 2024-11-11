@@ -44,14 +44,12 @@ const props = defineProps({
 .stats-comparison {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   background-color: aliceblue;
   margin: auto;
-  margin-bottom: 10px;
-  margin-top: 20px;
   border-radius: 10%;
   text-align: center;
   width: fit-content;
+  padding: 1%;
 }
 
 .main-stat {
@@ -60,6 +58,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   width: fit-content;
+  height: fit-content;
   justify-content: center;
 }
 
@@ -81,7 +80,7 @@ const props = defineProps({
     flex-direction: row;
     justify-content: center;
     width: fit-content;
-    margin: 10px;
+    margin: auto;
     border-style: solid none none none;
     border-color: darkcyan;
 }
@@ -92,7 +91,7 @@ const props = defineProps({
     align-items: center;
     vertical-align: middle;
     margin: 0 20px;
-    padding: 30px;
+    padding: 5px;
 }
 
 .good {
