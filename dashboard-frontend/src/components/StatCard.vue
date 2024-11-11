@@ -10,7 +10,11 @@
     <div class="substats">
         <div v-for="(stat, index) in subStats" :key="index">
             <div class="substat-elements">
-                <q-icon name="trending_down" class="icons" size="2rem"/>
+                <q-icon v-if="stat.comp == false && mainStat.value >= stat.value"
+                name="keyboard_double_arrow_up" class="icons" size="2rem" color="red"/>
+                <q-icon v-else
+                name="keyboard_double_arrow_down" class="icons" size="2rem" color="green"/>
+                
                 <div class="substat-text">
                     <p class="sub-stat-value value">{{ stat.value }}</p>
                     <p class="sub-stat-label label">{{ stat.label }}</p>
@@ -77,11 +81,14 @@ const props = defineProps({
     flex-direction: row;
     justify-content: center;
     width: fit-content;
-    margin: 10px
+    margin: 10px;
+    border-style: solid none none none;
+    border-color: darkcyan;
 }
 
 .substat-elements {
     display: flex;
+    flex-direction: column;
     align-items: center;
     vertical-align: middle;
     margin: 0 20px;
