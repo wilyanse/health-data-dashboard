@@ -97,6 +97,12 @@ export default {
   async mounted() {
     try {
       this.series = await apiService.getWeightData();
+
+      const maxYValue = this.series[0].data.reduce((max, current) => Math.max(max, current.y), -Infinity);
+      this.chartOptions.yaxis.max = Math.ceil(maxYValue / 10) * 10;
+
+      const minYValue = this.series[0].data.reduce((min, current) => Math.min(min, current.y), +Infinity);
+      this.chartOptions.yaxis.min = Math.floor(Math.min(minYValue, 50) / 10) * 10;
     } catch (error) {
       console.error('Error fetching data:', error);
     }
