@@ -64,32 +64,35 @@ export default {
             size: undefined,
             sizeOffset: 3,
           }
-      },
-      forecastDataPoints: {
-        count: 3,
-        fillOpacity: 0.5,
-        strokeWidth: 2,
-        dashArray: 4,
-      },
-      annotations: {
-        yaxis: [
-          {
-            y: 65,
-            y2: 0,
-            borderColor: '#000',
-            fillColor: '#FEB019',
-            opacity: 0.2,
-            label: {
-              borderColor: '#333',
-              style: {
-                fontSize: '10px',
-                color: '#333',
-                background: '#FEB019',
-              },
-              text: 'Goal weight',
-            }
-        }]
-      },
+        },
+        forecastDataPoints: {
+          count: 3,
+          fillOpacity: 0.5,
+          strokeWidth: 2,
+          dashArray: 4,
+        },
+        annotations: {
+          yaxis: [
+            {
+              y: 65,
+              y2: 0,
+              borderColor: '#000',
+              fillColor: '#FEB019',
+              opacity: 0.2,
+              label: {
+                borderColor: '#333',
+                style: {
+                  fontSize: '10px',
+                  color: '#333',
+                  background: '#FEB019',
+                },
+                text: 'Goal weight',
+              }
+            },
+          ],
+          xaxis: [],
+          points: [],
+        },
       },
       series: null,
     };
@@ -98,11 +101,33 @@ export default {
     try {
       this.series = await apiService.getWeightData();
 
-      const maxYValue = this.series[0].data.reduce((max, current) => Math.max(max, current.y), -Infinity);
-      this.chartOptions.yaxis.max = Math.ceil(maxYValue / 10) * 10;
+      const maxYObject = this.series[0].data.reduce((maxObj, current) => (current.y > maxObj.y ? current : maxObj), this.series[0].data[0]);
+      this.chartOptions.yaxis.max = Math.ceil(maxYObject.y / 10) * 10;
 
-      const minYValue = this.series[0].data.reduce((min, current) => Math.min(min, current.y), +Infinity);
-      this.chartOptions.yaxis.min = Math.floor(Math.min(minYValue, 50) / 10) * 10;
+      const minYObject = this.series[0].data.reduce((minObj, current) => (current.y < minObj.y ? current : minObj), this.series[0].data[0]);
+      this.chartOptions.yaxis.min = Math.floor(Math.min(minYObject.y, 50) / 10) * 10;
+      this.chartOptions.annotations.points.push(
+        {
+          x: minYObject.x,
+          y: minYObject.y,
+          borderColor: '#3D348B',
+          borderWidth: 2,
+          label: {
+            text: 'Lightest: ' + minYObject.y,
+            textAnchor: 'end',
+          },
+        },
+        {
+          x: maxYObject.x,
+          y: maxYObject.y,
+          borderColor: '#3D348B',
+          borderWidth: 2,
+          label: {
+            text: 'Heaviest: ' + maxYObject.y,
+            textAnchor: 'start',
+          },
+        }
+      );
     } catch (error) {
       console.error('Error fetching data:', error);
     }
