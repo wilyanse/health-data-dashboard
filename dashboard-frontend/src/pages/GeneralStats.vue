@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
-    <StatCard :mainStat="currentWeight" :subStats="weightSubStats" class="stat-card"/>
-    
+    <StatCard :mainStat="weightMain" :subStats="weightSub" class="stat-card"/>
+    <StatCard :mainStat="caloriesMain" :subStats="caloriesSub" class="stat-card" />
     <WeightChart class="weight-chart"/>
   </div>
 </template>
@@ -12,11 +12,11 @@ import WeightChart from '../components/WeightChart.vue';
 import apiService from '../services/ApiService.js';
 import StatCard from '../components/StatCard.vue';
 
-const currentWeight = ref({
+const weightMain = ref({
   value: 75,
   label: "Current Weight"
 });
-const weightSubStats = ref([
+const weightSub = ref([
   {
     value: 65,
     label: "Goal Weight",
@@ -27,13 +27,13 @@ const weightSubStats = ref([
 async function loadCurrentWeight() {
   const apiData = await apiService.getWeightDataSorted("date", "desc");
   console.log(apiData)
-  currentWeight.value = {
+  weightMain.value = {
     value: apiData[0].y,
     label: "Current Weight",
     unit: "kg",
   };
 
-  weightSubStats.value = [
+  weightSub.value = [
     {
       value: apiData[1].y,
       label: "Previous Weight",
@@ -50,7 +50,20 @@ async function loadCurrentWeight() {
       comp: false
     },
   ];
-}
+};
+
+const caloriesMain = ref({
+  value: 2000,
+  label: "Calories"
+});
+
+const caloriesSub = ref([
+  {
+    value: 2000,
+    label: "Goal Calories",
+    comp: true
+  }
+]);
 
 onMounted(() => {
   loadCurrentWeight();
