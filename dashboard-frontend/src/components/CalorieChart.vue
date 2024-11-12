@@ -65,6 +65,48 @@ export default {
       yaxis: {
         title: { text: 'Occurrences' }
       },
+      annotations: {
+        xaxis: [
+            {
+                x: 0,
+                x2: 200,
+                borderColor: '#000',
+                fillColor: '#FEB019',
+                opacity: 0.2,
+                label: {
+                    borderColor: '#333',
+                    style: {
+                    fontSize: '10px',
+                    color: '#333',
+                    background: '#FEB019',
+                    },
+                    text: 'Cutting',
+                    textAnchor: 'start',
+                    position: 'top',
+                    orientation: 'horizontal',
+                }
+            },
+           {
+                x: 300,
+                x2: 700,
+                borderColor: '#000',
+                fillColor: '#ff5e5e',
+                opacity: 0.2,
+                label: {
+                    borderColor: '#333',
+                    style: {
+                    fontSize: '10px',
+                    color: '#333',
+                    background: '#ff5e5e',
+                    },
+                    text: 'Bulking',
+                    textAnchor: 'start',
+                    position: 'top',
+                    orientation: 'horizontal',
+                }
+            },
+        ]
+      }
     }));
 
     return { chartSeries, chartOptions };

@@ -169,12 +169,14 @@ onMounted(() => {
     display: flex;
     padding: 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .charts {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
   }
 
   .chart {
