@@ -1,7 +1,10 @@
 <template>
   <div class="dashboard">
-    <StatCard :mainStat="weightMain" :subStats="weightSub" class="stat-card"/>
-    <StatCard :mainStat="caloriesMain" :subStats="caloriesSub" class="stat-card" />
+    <div class="stats">
+      <StatCard :mainStat="weightMain" :subStats="weightSub" class="stat-card"/>
+      <StatCard :mainStat="caloriesMain" :subStats="caloriesSub" class="stat-card" />
+      <StatCard :mainStat="proteinMain" :subStats="proteinSub" class="stat-card" />
+    </div>
     <WeightChart class="weight-chart"/>
   </div>
 </template>
@@ -14,12 +17,12 @@ import StatCard from '../components/StatCard.vue';
 
 const weightMain = ref({
   value: 75,
-  label: "Current Weight"
+  label: "Weight (kg)"
 });
 const weightSub = ref([
   {
     value: 65,
-    label: "Goal Weight",
+    label: "Goal",
     comp: true
   }
 ]);
@@ -28,24 +31,24 @@ async function loadWeightdata() {
   const apiData = await apiService.getWeightDataSorted("date", "desc");
   weightMain.value = {
     value: apiData[0].y,
-    label: "Current Weight",
+    label: "Weight (kg)",
     unit: "kg",
   };
 
   weightSub.value = [
     {
       value: apiData[1].y,
-      label: "Previous Weight",
+      label: "Previous",
       comp: false
     },
     {
       value: 65,
-      label: "Goal Weight",
+      label: "Goal",
       comp: false
     },
     {
       value: apiData[apiData.length - 1].y,
-      label: "Starting Weight",
+      label: "Starting",
       comp: false
     },
   ];
@@ -53,35 +56,70 @@ async function loadWeightdata() {
 
 const caloriesMain = ref({
   value: 2000,
-  label: "Calories"
+  label: "Calories (kcal)"
 });
 
 const caloriesSub = ref([
   {
     value: 2000,
-    label: "Goal Calories",
+    label: "Goal",
     comp: true
   }
 ]);
 
 async function loadCalorieData() {
-  const apiData = await apiService.getCaloriesData();
+  const apiData = await apiService.getDailySummaryData();
   const caloriesData = removeColumns(apiData, ['protein']);
   caloriesMain.value = {
     value: caloriesData[caloriesData.length - 1].calories,
-    label: "Calories yesterday"
+    label: "Calories (kcal)"
   };
 
   caloriesSub.value = [
     {
       value: 2000,
-      label: "Goal Calories",
+      label: "Goal",
       comp: false
     },
     {
       value: caloriesData[caloriesData.length - 2].calories,
-      label: "Previous Calories",
+      label: "Previous",
       comp: false
+    }
+  ]
+};
+
+const proteinMain = ref({
+  value: 120,
+  label: "Protein (g)"
+});
+
+const proteinSub = ref([
+  {
+    value: 120,
+    label: "Goal",
+    comp: true
+  }
+]);
+
+async function loadProteinData() {
+  const apiData = await apiService.getDailySummaryData();
+  const proteinData = removeColumns(apiData, ['calories']);
+  proteinMain.value = {
+    value: proteinData[proteinData.length - 1].protein,
+    label: "Protein (g)"
+  };
+
+  proteinSub.value = [
+    {
+      value: 120,
+      label: "Goal",
+      comp: true
+    },
+    {
+      value: proteinData[proteinData.length - 2].protein,
+      label: "Previous",
+      comp: true
     }
   ]
 };
@@ -97,6 +135,7 @@ function removeColumns(array, columnsToRemove) {
 onMounted(() => {
   loadWeightdata();
   loadCalorieData();
+  loadProteinData();
 });
 </script>
 
@@ -111,6 +150,11 @@ onMounted(() => {
   }
 
   .dashboard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stats {
     display: flex;
   }
 </style>
