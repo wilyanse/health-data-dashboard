@@ -14,7 +14,9 @@ public interface SummaryRepository extends JpaRepository<Summary, Integer> {
            "FROM Summary b " +
            "WHERE (:date IS NULL OR b.date = :date) " +
            "AND (:calories IS NULL OR b.calories = :calories)" +
-           "AND (:protein IS NULL OR b.protein = :protein)")
+           "AND (:protein IS NULL OR b.protein = :protein)" +
+           "ORDER BY b.date"
+           )
     List<SummaryDTO> findByDateAndCaloriesAndProtein(
         @Param("date") String date, 
         @Param("calories") String calories,
