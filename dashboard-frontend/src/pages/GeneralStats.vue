@@ -24,9 +24,8 @@ const weightSub = ref([
   }
 ]);
 
-async function loadCurrentWeight() {
+async function loadWeightdata() {
   const apiData = await apiService.getWeightDataSorted("date", "desc");
-  console.log(apiData)
   weightMain.value = {
     value: apiData[0].y,
     label: "Current Weight",
@@ -65,8 +64,39 @@ const caloriesSub = ref([
   }
 ]);
 
+async function loadCalorieData() {
+  const apiData = await apiService.getCaloriesData();
+  const caloriesData = removeColumns(apiData, ['protein']);
+  caloriesMain.value = {
+    value: caloriesData[caloriesData.length - 1].calories,
+    label: "Calories yesterday"
+  };
+
+  caloriesSub.value = [
+    {
+      value: 2000,
+      label: "Goal Calories",
+      comp: false
+    },
+    {
+      value: caloriesData[caloriesData.length - 2].calories,
+      label: "Previous Calories",
+      comp: false
+    }
+  ]
+};
+
+function removeColumns(array, columnsToRemove) {
+  return array.map(item => {
+    let newItem = { ...item };
+    columnsToRemove.forEach(column => delete newItem[column]);
+    return newItem;
+  });
+}
+
 onMounted(() => {
-  loadCurrentWeight();
+  loadWeightdata();
+  loadCalorieData();
 });
 </script>
 

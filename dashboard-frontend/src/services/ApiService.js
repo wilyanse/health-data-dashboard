@@ -41,4 +41,10 @@ export default {
 
     return parsedData;
   },
+  async getCaloriesData() {
+    const apiResponse = await apiClient.get(`/dailysummaries`);
+    const apiData = apiResponse.data;
+
+    return apiData;
+  }
 };
