@@ -10,11 +10,18 @@
     <div class="substats">
         <div v-for="(stat, index) in subStats" :key="index">
             <div class="substat-elements">
-                <q-icon v-if="stat.comp == false && mainStat.value >= stat.value"
-                name="keyboard_double_arrow_up" class="icons" size="2rem" color="red"/>
-                <q-icon v-else
-                name="keyboard_double_arrow_down" class="icons" size="2rem" color="green"/>
-                
+                <div v-if="mainStat.value >= stat.value" >
+                  <q-icon v-if="stat.comp == false"
+                  name="keyboard_double_arrow_down" class="icons" size="2rem" color="red"/>
+                  <q-icon v-else
+                  name="keyboard_double_arrow_down" class="icons" size="2rem" color="green"/>
+                </div>
+                <div v-else>
+                  <q-icon v-if="stat.comp == false"
+                  name="keyboard_double_arrow_up" class="icons" size="2rem" color="green"/>
+                  <q-icon v-else
+                  name="keyboard_double_arrow_up" class="icons" size="2rem" color="red"/>
+                </div>
                 <div class="substat-text">
                     <p class="sub-stat-value value">{{ stat.value }}</p>
                     <p class="sub-stat-label label">{{ stat.label }}</p>
