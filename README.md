@@ -82,7 +82,6 @@ Documentation:
 - Add documentation website for modifying files as needed
 
 Removed CSVReader from docker compose for now:
-
   csvreader-app:
     build:
       context: ./csvreader   # Path to your Spring Boot project
