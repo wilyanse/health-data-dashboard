@@ -129,9 +129,8 @@ export default {
 };
 </script>
 
-<style>
-.chart-container {
-    margin: 0 auto;
+<style scoped>
+  .chart-container {
     aspect-ratio: 16 / 9;
-}
+  }
 </style>

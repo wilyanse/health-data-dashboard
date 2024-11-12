@@ -5,7 +5,10 @@
       <StatCard :mainStat="caloriesMain" :subStats="caloriesSub" class="stat-card" />
       <StatCard :mainStat="proteinMain" :subStats="proteinSub" class="stat-card" />
     </div>
-    <WeightChart class="weight-chart"/>
+    <div class="charts">
+      <WeightChart class="weight-chart chart"/>
+      <CalorieChart :data="nutritionData" class="chart"/>
+    </div>
   </div>
 </template>
 
@@ -14,6 +17,7 @@ import { ref, onMounted } from 'vue';
 import WeightChart from '../components/WeightChart.vue';
 import apiService from '../services/ApiService.js';
 import StatCard from '../components/StatCard.vue';
+import CalorieChart from '../components/CalorieChart.vue';
 
 const weightMain = ref({
   value: 75,
@@ -124,6 +128,14 @@ async function loadProteinData() {
   ]
 };
 
+const nutritionData = ref([
+  { date: "2024-03-21", calories: 998.43, protein: 47.9 },
+]);
+
+async function loadNutritionData(){
+  nutritionData.value = await apiService.getDailySummaryData();
+}
+
 function removeColumns(array, columnsToRemove) {
   return array.map(item => {
     let newItem = { ...item };
@@ -136,17 +148,16 @@ onMounted(() => {
   loadWeightdata();
   loadCalorieData();
   loadProteinData();
+  loadNutritionData();
 });
 </script>
 
-<style scoped>
-  .weight-chart {
-    width: 50%;
-    margin-top: 30px;
-  }
 
+<style scoped>
   .stat-card {
-    width: 35%;
+    width: 30%;
+    margin: 10px 20px;
+    min-width: 350px;
   }
 
   .dashboard {
@@ -156,5 +167,19 @@ onMounted(() => {
 
   .stats {
     display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+  }
+
+  .charts {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .chart {
+    width: 45%;
+    min-width: 500px;
+    margin: auto;
   }
 </style>
