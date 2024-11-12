@@ -17,7 +17,7 @@ public class SummaryService {
         this.summaryRepository = summaryRepository;
     }
 
-    public List<SummaryDTO> getSummaries(String date, String protein) {
-        return summaryRepository.findByDateAndProtein(date, protein);
+    public List<SummaryDTO> getSummaries(String date, String calories, String protein) {
+        return summaryRepository.findByDateAndCaloriesAndProtein(date, calories, protein);
     }
 }

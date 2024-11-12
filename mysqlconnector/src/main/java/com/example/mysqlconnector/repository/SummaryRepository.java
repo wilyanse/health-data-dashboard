@@ -10,12 +10,14 @@ import java.util.List;
 public interface SummaryRepository extends JpaRepository<Summary, Integer> {
 
     // Example of a dynamic query method using JPQL with DTO projection
-    @Query("SELECT new com.example.mysqlconnector.dto.SummaryDTO(b.date, b.protein) " +
+    @Query("SELECT new com.example.mysqlconnector.dto.SummaryDTO(b.date, b.calories, b.protein) " +
            "FROM Summary b " +
            "WHERE (:date IS NULL OR b.date = :date) " +
+           "AND (:calories IS NULL OR b.calories = :calories)" +
            "AND (:protein IS NULL OR b.protein = :protein)")
-    List<SummaryDTO> findByDateAndProtein(
+    List<SummaryDTO> findByDateAndCaloriesAndProtein(
         @Param("date") String date, 
+        @Param("calories") String calories,
         @Param("protein") String protein
     );
 

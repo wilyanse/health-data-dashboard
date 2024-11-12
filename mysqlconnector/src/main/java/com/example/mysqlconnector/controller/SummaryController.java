@@ -24,8 +24,9 @@ public class SummaryController {
     @GetMapping
     public List<SummaryDTO> getSummaries(
         @RequestParam(required = false) String date,
+        @RequestParam(required = false) String calories,
         @RequestParam(required = false) String protein
     ) {
-        return summaryService.getSummaries(date, protein);
+        return summaryService.getSummaries(date, calories, protein);
     }
 }

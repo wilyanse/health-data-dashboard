@@ -13,6 +13,9 @@ public class Summary {
     private Integer id;
 
     private LocalDate date;
+
+    @Column(name = "energy_kcal")
+    private BigDecimal calories;
     
     @Column(name = "protein_g")
     private BigDecimal protein;
@@ -32,6 +35,14 @@ public class Summary {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public BigDecimal getCalories() {
+        return calories;
+    }
+
+    public void setCalories(BigDecimal calories) {
+        this.calories = calories;
     }
 
     public BigDecimal getProtein() {
