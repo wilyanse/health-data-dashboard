@@ -69,7 +69,7 @@ export default {
         xaxis: [
             {
                 x: 0,
-                x2: 200,
+                x2: 250,
                 borderColor: '#000',
                 fillColor: '#FEB019',
                 opacity: 0.2,
@@ -88,7 +88,7 @@ export default {
             },
            {
                 x: 300,
-                x2: 700,
+                x2: 1000,
                 borderColor: '#000',
                 fillColor: '#ff5e5e',
                 opacity: 0.2,

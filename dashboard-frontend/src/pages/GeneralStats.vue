@@ -156,7 +156,7 @@ onMounted(() => {
 <style scoped>
   .stat-card {
     width: 30%;
-    margin: 10px 20px;
+    margin: 10px;
     min-width: 350px;
   }
 
