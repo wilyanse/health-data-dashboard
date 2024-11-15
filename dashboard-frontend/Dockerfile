@@ -6,6 +6,9 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json package-lock.json ./
+
+# npm i -g quasar
+# npm install -g @quasar/cli
 RUN npm install
 
 # Copy the rest of the application files
