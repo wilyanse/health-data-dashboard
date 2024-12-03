@@ -8,6 +8,7 @@
     <div class="charts">
       <WeightChart class="weight-chart chart"/>
       <CalorieChart :data="nutritionData" class="chart"/>
+      <ServingsTable :data="servingsData" class="table"/>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@ import WeightChart from '../components/WeightChart.vue';
 import apiService from '../services/ApiService.js';
 import StatCard from '../components/StatCard.vue';
 import CalorieChart from '../components/CalorieChart.vue';
+import ServingsTable from '../components/ServingsTable.vue';
 
 const weightMain = ref({
   value: 75,
@@ -134,7 +136,24 @@ const nutritionData = ref([
 
 async function loadNutritionData(){
   nutritionData.value = await apiService.getDailySummaryData();
-}
+};
+
+const servingsData = ref([
+  {
+    date: "2024-03-21",
+    group_name: 'Uncategorized',
+    food_name: 'Eggs, Cooked',
+    amount: '3.00 large',
+    calories: 232.50,
+    protein: 14.9
+  },
+]);
+
+async function loadServingsData(){
+  servingsData.value = await apiService.getServingsData();
+  console.log(servingsData.value);
+};
+
 
 function removeColumns(array, columnsToRemove) {
   return array.map(item => {
@@ -142,13 +161,14 @@ function removeColumns(array, columnsToRemove) {
     columnsToRemove.forEach(column => delete newItem[column]);
     return newItem;
   });
-}
+};
 
 onMounted(() => {
   loadWeightdata();
   loadCalorieData();
   loadProteinData();
   loadNutritionData();
+  loadServingsData();
 });
 </script>
 
@@ -182,6 +202,11 @@ onMounted(() => {
   .chart {
     width: 45%;
     min-width: 500px;
+    margin: auto;
+  }
+
+  .table {
+    width: 100%;
     margin: auto;
   }
 </style>

@@ -45,5 +45,10 @@ export default {
     const apiResponse = await apiClient.get(`/dailysummaries`);
     const apiData = apiResponse.data;
     return apiData;
+  },
+  async getServingsData() {
+    const apiResponse = await apiClient.get(`/servings`);
+    const apiData = apiResponse.data;
+    return apiData;
   }
 };
