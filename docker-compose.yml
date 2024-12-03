@@ -1,16 +1,18 @@
 services:
   quasar-app:
+    container_name: health-dashboard-quasar
     build:
       context: ./dashboard-frontend       # Path to your Quasar project
       dockerfile: Dockerfile
     ports:
-      - "9000:9000"           # Map Quasar container port 9000 to host port 9000
+      - "${PORT_QUASAR}:80"           # Map Quasar container port 9000 to host port 9000
     volumes:
       - ./dashboard-frontend:/app         # Mount local Quasar code (optional, for live development)
     networks:
       - app-network
 
   mysql-db:
+    container_name: health-dashboard-database
     build:
       context: ./mysql-db
       dockerfile: Dockerfile
@@ -20,20 +22,21 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"  # Map MySQL's default port 3306 to 7000 on the host
+      - "${PORT_MYSQL}:3306"  # Map MySQL's default port 3306 to 7000 on the host
     volumes:
       - ./mysql-db/init-scripts:/docker-entrypoint-initdb.d  # Mount init-scripts directory
     networks:
       - app-network
 
   mysqlconnector-app:
+    container_name: health-dashboard-backend
     build:
       context: ./mysqlconnector   # Path to your Spring Boot project
       dockerfile: Dockerfile
     depends_on:
       - mysql-db
     ports:
-      - "8080:8080"           # Expose Spring Boot API on port 8080
+      - "${PORT_SPRINGBOOT}:${PORT_SPRINGBOOT}"           # Expose Spring Boot API on port 8080
     volumes:
       - ./mysqlconnector:/app     # Mount local Spring Boot code (optional, for live development)
     environment:
